@@ -8,7 +8,10 @@
 #       ↓
 # COGNITIVE STATE MODEL
 # ============================================================
+from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+MODELS_DIR = PROJECT_ROOT / "models"
 import os
 import joblib
 import numpy as np
@@ -17,27 +20,11 @@ from tensorflow.keras.models import load_model
 
 
 # ============================================================
-# PROJECT PATH
-# ============================================================
-
-BASE_DIR = r"C:\Users\bmana\Documents\NeuroStateAI"
-
-
-# ============================================================
 # MODEL DIRECTORIES
 # ============================================================
 
-AGE_DIR = os.path.join(
-    BASE_DIR,
-    "models",
-    "age_estimation"
-)
-
-STATE_DIR = os.path.join(
-    BASE_DIR,
-    "models",
-    "cognitive_state"
-)
+AGE_DIR = MODELS_DIR / "age_estimation"
+STATE_DIR = MODELS_DIR / "cognitive_state"
 
 
 # ============================================================
@@ -56,30 +43,20 @@ FEATURE_COLUMNS = [
     "cognitive_intensity"
 ]
 
-
 # ============================================================
 # LOAD AGE MODEL
 # ============================================================
 
 age_model = joblib.load(
-    os.path.join(
-        AGE_DIR,
-        "age_model.pkl"
-    )
+    AGE_DIR / "age_model.pkl"
 )
 
 age_encoder = joblib.load(
-    os.path.join(
-        AGE_DIR,
-        "age_label_encoder.pkl"
-    )
+    AGE_DIR / "age_label_encoder.pkl"
 )
 
 age_features = joblib.load(
-    os.path.join(
-        AGE_DIR,
-        "age_features.pkl"
-    )
+    AGE_DIR / "age_features.pkl"
 )
 
 
@@ -88,17 +65,11 @@ age_features = joblib.load(
 # ============================================================
 
 state_model = load_model(
-    os.path.join(
-        STATE_DIR,
-        "state_model.keras"
-    )
+    STATE_DIR / "state_model.keras"
 )
 
 state_info = joblib.load(
-    os.path.join(
-        STATE_DIR,
-        "state_info.pkl"
-    )
+    STATE_DIR / "state_info.pkl"
 )
 
 
