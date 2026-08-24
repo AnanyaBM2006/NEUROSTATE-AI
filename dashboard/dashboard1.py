@@ -9,7 +9,22 @@ import json
 import smtplib
 from email.message import EmailMessage
 
-from live.mindlink import MindLinkReader
+import sys
+from pathlib import Path
+
+# Make dashboard/ available for local module imports
+DASHBOARD_DIR = Path(__file__).resolve().parent
+if str(DASHBOARD_DIR) not in sys.path:
+    sys.path.insert(0, str(DASHBOARD_DIR))
+
+# MindLink is available for the local live demo.
+# The deployed Streamlit app can still run without the headset.
+try:
+    from live.mindlink import MindLinkReader
+    MINDLINK_AVAILABLE = True
+except Exception:
+    MindLinkReader = None
+    MINDLINK_AVAILABLE = False
 from utils.eeg_features import extract_features
 from utils.csv_pipeline import preprocess_csv
 from utils.model_pipeline import run_models
@@ -1334,9 +1349,13 @@ if source == "Live MindLink":
                 duration_label
             ]
 
-            reader = MindLinkReader(
-                save_csv=True
-            )
+            if not MINDLINK_AVAILABLE:
+             st.warning(
+               "Live MindLink hardware is available only when running NeuroState AI locally. "
+               "Please use CSV Upload for the deployed demo."
+             )
+            else:
+             reader = MindLinkReader(save_csv=True)
 
             st.session_state.reader = reader
             st.session_state.session_started = time.time()
