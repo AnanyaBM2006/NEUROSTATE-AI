@@ -1,4 +1,6 @@
 import streamlit as st
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # ============================================================
@@ -356,9 +358,9 @@ h1, h2, h3, p, label {
     with right:
 
         st.image(
-            "assets/brain.png",
-            use_container_width=True
-        )
+    str(BASE_DIR / "assets" / "brain.png"),
+    use_container_width=True
+    )
 
 
     st.markdown("---")
