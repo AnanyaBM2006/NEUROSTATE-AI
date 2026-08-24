@@ -1,0 +1,50 @@
+# -------------------------
+# Streamlit secrets
+# -------------------------
+dashboard/.streamlit/secrets.toml
+
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+
+# -------------------------
+# Virtual environments
+# -------------------------
+.venv/
+venv/
+env/
+
+# -------------------------
+# VS Code
+# -------------------------
+.vscode/
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Local datasets
+# -------------------------
+data/
+dashboard/data/
+
+# -------------------------
+# Notebooks
+# -------------------------
+notebooks/
+
+# -------------------------
+# Local test files
+# -------------------------
+test.py
+dashboard/test_*.py
+
+# -------------------------
+# Temporary / unused files
+# -------------------------
+dashboard/Untitled-*.py
